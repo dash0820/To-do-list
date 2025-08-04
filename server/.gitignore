@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*.local
+
+# TypeScript cache
+*.tsbuildinfo
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing & coverage
+coverage/
+test-output/
+junit.xml
+
+# Nodemon
+.nodemon-debug.json
+
+# PM2 process files
+pids/
+*.pid
+
+# Misc
+.cache/
+.parcel-cache/
