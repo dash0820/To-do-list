@@ -1,7 +1,10 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signin } from "@/api/Auth";
+import Button from "../common/Button"; // Import Button
+import Input from "../common/Input"; // Import Input
 
 export default function SigninPage() {
   const [email, setEmail] = useState<string>("");
@@ -30,35 +33,41 @@ export default function SigninPage() {
         className="bg-white p-8 rounded shadow-md w-80"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
-        <input
+
+        <Input
           type="email"
+          name="email"
           placeholder="Email"
-          className="w-full p-2 border mb-4 rounded"
           value={email}
+          className="mb-2"
           onChange={(e) => {
-            setEmail(e.target.value), setError("");
+            setEmail(e.target.value);
+            setError(""); // Clear error on change
           }}
-          required
         />
-        <input
+
+        <Input
           type="password"
+          name="password"
           placeholder="Password"
-          className="w-full p-2 border mb-4 rounded"
           value={password}
+          className="mb-2"
           onChange={(e) => {
-            setPassword(e.target.value), setError("");
+            setPassword(e.target.value);
+            setError(""); // Clear error on change
           }}
-          required
         />
+
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-        <button
+
+        <input
           type="submit"
-          className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
-        >
-          Sign In
-        </button>
+          className="w-full bg-green-500 hover:bg-green-600 py-1 text-white rounded cursor-pointer"
+          value="Sign In"
+        />
+
         <p className="text-center">
-          If you don't have account,{" "}
+          If you don't have an account,{" "}
           <button
             className="pt-2 cursor-pointer hover:text-blue-400"
             onClick={() => {

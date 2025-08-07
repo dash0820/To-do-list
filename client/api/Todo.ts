@@ -11,10 +11,10 @@ export const getTodos = async () => {
   return response.data;
 };
 
-export const postTodo = async (text: string) => {
+export const postTodo = async (Data: Object) => {
   const response = await api.post(
     "/todos/add",
-    { id: window.localStorage.getItem("user"), text: text },
+    { id: window.localStorage.getItem("user"), ...Data },
     {
       withCredentials: true,
     }
@@ -22,10 +22,10 @@ export const postTodo = async (text: string) => {
   return response.data;
 };
 
-export const putTodo = async (id: number, completed: boolean) => {
+export const putTodo = async (id: number, data: Object) => {
   const response = await api.put(
     `/todos/${id}`,
-    { completed },
+    { ...data },
     {
       withCredentials: true,
     }

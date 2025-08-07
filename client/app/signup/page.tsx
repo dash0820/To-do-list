@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { isValidEmail, isValidPassword } from "@/lib/validation/authValidation";
 import { signup } from "@/api/Auth";
+import Button from "../common/Button"; // Import Button
+import Input from "../common/Input"; // Import Input
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -21,7 +23,7 @@ export default function SignupPage() {
     }
 
     if (!isValidPassword(password)) {
-      setErrorPassword("8+ , 1 capital, 1 number, 1 special");
+      setErrorPassword("8+ characters, 1 capital, 1 number, 1 special");
       return;
     }
 
@@ -37,16 +39,6 @@ export default function SignupPage() {
     }
   };
 
-  const passwordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setErrorPassword("");
-    setPassword(e.target.value);
-  };
-
-  const emailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setErrorEmail("");
-    setEmail(e.target.value);
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
@@ -54,24 +46,32 @@ export default function SignupPage() {
         className="bg-white p-8 rounded shadow-md w-80"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
-        <input
+
+        <Input
           placeholder="Email"
-          className="w-full p-2 border mb-4 rounded"
+          type="email"
+          name="email"
           value={email}
-          onChange={(event) => emailChange(event)}
-          required
+          className="mb-2"
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setErrorEmail(""); // Clear error on change
+          }}
         />
         {errorEmail && (
           <p className="text-red-500 text-sm mb-4">{errorEmail}</p>
         )}
-        <input
+
+        <Input
           type="password"
           name="password"
-          required
           placeholder="Password"
-          className="w-full p-2 border mb-4 rounded"
           value={password}
-          onChange={(event) => passwordChange(event)}
+          className="mb-2"
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setErrorPassword(""); // Clear error on change
+          }}
         />
         {errorPassword && (
           <p className="text-red-500 text-sm mb-4 text-center">
@@ -79,14 +79,14 @@ export default function SignupPage() {
           </p>
         )}
 
-        <button
+        <input
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-        >
-          Sign Up
-        </button>
+          className="w-full bg-blue-500 hover:bg-blue-600 py-1 text-white rounded cursor-pointer "
+          value="Sign Up"
+        />
+
         <p className="text-center">
-          If you already have account,{" "}
+          Already have an account,{" "}
           <button
             className="pt-2 cursor-pointer hover:text-green-500"
             onClick={() => {

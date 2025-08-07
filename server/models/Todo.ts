@@ -4,7 +4,11 @@ import { UserInstance } from "./User";
 
 interface TodoAttributes {
   id: number;
-  text: string;
+  title: string;
+  description: string;
+  tag: string;
+  startDate: Date | null;
+  endDate: Date | null;
   completed: boolean;
   userId: number;
 }
@@ -25,9 +29,25 @@ const Todo = sequelize.define<TodoInstance>("Todo", {
     allowNull: false,
     primaryKey: true,
   },
-  text: {
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  description: {
+    type: DataTypes.STRING(500),
+    allowNull: false,
+  },
+  tag: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  startDate: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  endDate: {
+    type: DataTypes.DATE,
+    allowNull: true,
   },
   completed: {
     type: DataTypes.BOOLEAN,
